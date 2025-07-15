@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>TextSync</title>
+  <!-- ✅ Google Fonts for Funky Professional Look -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    /* 🌈 Base & Background */
+    body {
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+      background: linear-gradient(135deg, #e0eafc, #cfdef3);
+      font-family: 'Poppins', sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+    }
+
+    /* 💎 Card Container with Smooth Entrance */
+    .app-container {
+      background: rgba(255, 255, 255, 0.3);
+      backdrop-filter: blur(15px);
+      border-radius: 20px;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
+      width: 90%;
+      max-width: 700px;
+      padding: 50px;
+      display: flex;
+      flex-direction: column;
+      gap: 30px;
+      border: 1px solid rgba(255, 255, 255, 0.4);
+      animation: fadeSlideUp 1.2s ease forwards;
+      opacity: 0;
+      transform: translateY(50px);
+    }
+
+    @keyframes fadeSlideUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* 🎀 Stylish Title */
+    .app-title {
+      font-size: 44px;
+      font-weight: 700;
+      text-align: center;
+      color: #1a1a1a;
+      background: linear-gradient(to right, #4b6cb7, #182848);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: floatTitle 3s ease-in-out infinite;
+      letter-spacing: 1px;
+    }
+
+    @keyframes floatTitle {
+      0%, 100% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(-6px);
+      }
+    }
+
+    /* 📝 Funky Label Style */
+    label {
+      font-size: 17px;
+      font-weight: 600;
+      color: #333;
+      margin-bottom: 8px;
+      display: block;
+      letter-spacing: 0.5px;
+      position: relative;
+    }
+
+    label::before {
+      content: attr(data-emoji);
+      position: absolute;
+      left: -28px;
+      top: 1px;
+      font-size: 18px;
+    }
+
+    /* 🧾 Text Input Box */
+    textarea {
+      width: 100%;
+      height: 140px;
+      font-size: 16px;
+      padding: 16px;
+      border-radius: 12px;
+      border: 1px solid #ccc;
+      background: #f7faff;
+      color: #333;
+      resize: vertical;
+      transition: all 0.3s ease;
+      box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.05);
+    }
+
+    textarea:focus {
+      border: 1px solid #4b6cb7;
+      box-shadow: 0 0 0 3px rgba(75, 108, 183, 0.2);
+      outline: none;
+      transform: scale(1.01);
+    }
+
+    /* 📤 Output Box Styling */
+    .output-box {
+      min-height: 100px;
+      padding: 16px;
+      border-radius: 12px;
+      background: #ffffff;
+      border: 1px solid #dcdcdc;
+      font-size: 16px;
+      color: #333;
+      white-space: pre-wrap;
+      transition: background-color 0.3s ease, transform 0.3s ease;
+      box-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.05);
+    }
+
+    .output-box:hover {
+      background-color: #f4f7fa;
+      transform: scale(1.01);
+    }
+
+    /* 🎇 Floating Glows */
+    .glow {
+      position: absolute;
+      width: 300px;
+      height: 300px;
+      background: radial-gradient(circle, rgba(255,255,255,0.3), transparent);
+      border-radius: 50%;
+      z-index: 0;
+      filter: blur(80px);
+      animation: floatGlow 10s infinite alternate ease-in-out;
+    }
+
+    .glow:nth-child(1) {
+      top: 10%;
+      left: 20%;
+    }
+
+    .glow:nth-child(2) {
+      bottom: 15%;
+      right: 15%;
+    }
+
+    @keyframes floatGlow {
+      from {
+        transform: translateY(0px);
+      }
+      to {
+        transform: translateY(-20px);
+      }
+    }
+  </style>
+  <script>
+    function showText() {
+      const inputBox = document.getElementById("inputBox");
+      const outputBox = document.getElementById("outputBox");
+      outputBox.innerHTML = inputBox.value;
+    }
+  </script>
+</head>
+<body>
+
+  <!-- ✨ Glowing Orbs Background -->
+  <div class="glow"></div>
+  <div class="glow"></div>
+
+  <div class="app-container">
+    <div class="app-title">TextSync</div>
+
+    <div>
+      <label for="inputBox" data-emoji="✍️">Enter your text</label>
+      <textarea id="inputBox" onkeyup="showText()"></textarea>
+    </div>
+
+    <div>
+      <label for="outputBox" data-emoji="📤">Live Output</label>
+      <div id="outputBox" class="output-box"></div>
+    </div>
+  </div>
+
+</body>
+</html>
